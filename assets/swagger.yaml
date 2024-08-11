@@ -1,0 +1,793 @@
+basePath: /Dev/v1/cybersource
+definitions:
+  decision_manager.AmountDetails:
+    properties:
+      currency:
+        type: string
+      totalAmount:
+        type: string
+    type: object
+  decision_manager.BillTo:
+    properties:
+      address1:
+        type: string
+      address2:
+        type: string
+      administrativeArea:
+        type: string
+      country:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      locality:
+        type: string
+      phoneNumber:
+        type: string
+      postalCode:
+        type: string
+    type: object
+  decision_manager.Card:
+    properties:
+      bin:
+        type: string
+      expirationMonth:
+        type: string
+      expirationYear:
+        type: string
+      number:
+        type: string
+      type:
+        type: string
+    type: object
+  decision_manager.ClientReferenceInformation:
+    properties:
+      code:
+        type: string
+      comments:
+        type: string
+    type: object
+  decision_manager.ConsumerAuthenticationInformation:
+    properties:
+      token:
+        type: string
+    type: object
+  decision_manager.Detail:
+    properties:
+      field:
+        type: string
+      reason:
+        type: string
+    type: object
+  decision_manager.ErrorInformation:
+    properties:
+      details:
+        items:
+          $ref: '#/definitions/decision_manager.Detail'
+        type: array
+      message:
+        type: string
+      reason:
+        type: string
+    type: object
+  decision_manager.IPAddress:
+    properties:
+      administrativeArea:
+        type: string
+      anonymizerStatus:
+        type: string
+      country:
+        type: string
+      locality:
+        type: string
+      routingMethod:
+        type: string
+    type: object
+  decision_manager.InfoCodes:
+    properties:
+      address:
+        items:
+          type: string
+        type: array
+      customerList:
+        items:
+          type: string
+        type: array
+      globalVelocity:
+        items:
+          type: string
+        type: array
+      identityChange:
+        items:
+          type: string
+        type: array
+      internet:
+        items:
+          type: string
+        type: array
+      phone:
+        items:
+          type: string
+        type: array
+      suspicious:
+        items:
+          type: string
+        type: array
+      velocity:
+        items:
+          type: string
+        type: array
+    type: object
+  decision_manager.LineItem:
+    properties:
+      productSku:
+        type: string
+      quantity:
+        type: string
+      unitPrice:
+        type: string
+    type: object
+  decision_manager.MerchantDefinedInformation:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    type: object
+  decision_manager.OrderInformation:
+    properties:
+      amountDetails:
+        $ref: '#/definitions/decision_manager.AmountDetails'
+      billTo:
+        $ref: '#/definitions/decision_manager.BillTo'
+      lineItems:
+        items:
+          $ref: '#/definitions/decision_manager.LineItem'
+        type: array
+      shipTo:
+        $ref: '#/definitions/decision_manager.ShipTo'
+    type: object
+  decision_manager.PaymentInformationReq:
+    properties:
+      card:
+        $ref: '#/definitions/decision_manager.Card'
+    type: object
+  decision_manager.PaymentInformationResp:
+    properties:
+      accountType:
+        type: string
+      bin:
+        type: string
+      binCountry:
+        type: string
+      issuer:
+        type: string
+      scheme:
+        type: string
+    type: object
+  decision_manager.Profile:
+    properties:
+      desinationQueue:
+        type: string
+      name:
+        type: string
+      selectorRule:
+        type: string
+    type: object
+  decision_manager.RiskInformation:
+    properties:
+      casePriority:
+        type: string
+      infoCodes:
+        $ref: '#/definitions/decision_manager.InfoCodes'
+      ipAddress:
+        $ref: '#/definitions/decision_manager.IPAddress'
+      localTime:
+        type: string
+      profile:
+        $ref: '#/definitions/decision_manager.Profile'
+      providers:
+        additionalProperties: true
+        type: object
+      rules:
+        items:
+          $ref: '#/definitions/decision_manager.Rules'
+        type: array
+      score:
+        $ref: '#/definitions/decision_manager.Score'
+    type: object
+  decision_manager.Rules:
+    properties:
+      decision:
+        type: string
+      name:
+        type: string
+    type: object
+  decision_manager.Score:
+    properties:
+      factorCodes:
+        items:
+          type: string
+        type: array
+      modelUsed:
+        type: string
+      result:
+        type: string
+    type: object
+  decision_manager.ShipTo:
+    properties:
+      address1:
+        type: string
+      address2:
+        type: string
+      administrativeArea:
+        type: string
+      country:
+        type: string
+      locality:
+        type: string
+      postalCode:
+        type: string
+    type: object
+  internal.Address:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      external_number:
+        type: string
+      internal_number:
+        type: string
+      state:
+        type: string
+      street:
+        type: string
+      town:
+        type: string
+      zip_code:
+        type: string
+    type: object
+  internal.Client:
+    properties:
+      address:
+        $ref: '#/definitions/internal.Address'
+      email:
+        type: string
+      id:
+        type: string
+      maternal_surname:
+        type: string
+      name:
+        type: string
+      paternal_surname:
+        type: string
+      phone:
+        $ref: '#/definitions/internal.Phone'
+    type: object
+  internal.Commerce:
+    properties:
+      active:
+        type: boolean
+      created_at:
+        type: string
+      id:
+        type: integer
+      merchant_id:
+        type: string
+      merchant_key_id:
+        type: string
+      merchant_secret_key:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  internal.CommerceCreateRequest:
+    properties:
+      id:
+        type: integer
+      merchant_id:
+        type: string
+      merchant_key_id:
+        type: string
+      merchant_secret_key:
+        type: string
+    type: object
+  internal.CommerceDeleteResponse:
+    properties:
+      code:
+        type: integer
+      commerce:
+        type: object
+      datetime:
+        type: string
+      status:
+        type: string
+      timestamp:
+        type: integer
+    type: object
+  internal.CommerceResponse:
+    properties:
+      code:
+        type: integer
+      commerce:
+        $ref: '#/definitions/internal.Commerce'
+      datetime:
+        type: string
+      status:
+        type: string
+      timestamp:
+        type: integer
+    type: object
+  internal.CommerceUpdateRequest:
+    properties:
+      active:
+        type: boolean
+      merchant_id:
+        type: string
+      merchant_key_id:
+        type: string
+      merchant_secret_key:
+        type: string
+    type: object
+  internal.CybersourceResponse:
+    properties:
+      client_reference_information:
+        $ref: '#/definitions/decision_manager.ClientReferenceInformation'
+      consumer_authentication_information:
+        $ref: '#/definitions/decision_manager.ConsumerAuthenticationInformation'
+      details:
+        items:
+          $ref: '#/definitions/decision_manager.Detail'
+        type: array
+      error_information:
+        $ref: '#/definitions/decision_manager.ErrorInformation'
+      id:
+        type: string
+      message:
+        type: string
+      payment_information:
+        $ref: '#/definitions/decision_manager.PaymentInformationResp'
+      reason:
+        type: string
+      risk_information:
+        $ref: '#/definitions/decision_manager.RiskInformation'
+      status:
+        type: string
+      status_code:
+        type: integer
+      submit_time_utc:
+        type: string
+    type: object
+  internal.DeviceInformation:
+    properties:
+      fingerprint:
+        type: string
+      ipv4:
+        type: string
+    type: object
+  internal.Item:
+    properties:
+      ean_upc:
+        type: string
+      name:
+        type: string
+      quantity:
+        type: string
+      sku:
+        type: string
+      unit_amount:
+        type: string
+    type: object
+  internal.PaymentMethod:
+    properties:
+      address:
+        $ref: '#/definitions/internal.Address'
+      bin:
+        type: string
+      card_token:
+        type: string
+      expiration_month:
+        type: string
+      expiration_year:
+        type: string
+      number:
+        type: string
+      type:
+        type: string
+    type: object
+  internal.Phone:
+    properties:
+      area_code:
+        type: string
+      country_code:
+        type: string
+      number:
+        type: string
+    type: object
+  internal.Purchase:
+    properties:
+      delivery_amount:
+        type: string
+      delivery_date:
+        type: string
+      delivery_service:
+        type: string
+      delivery_tracking:
+        type: string
+      device_fingerprint:
+        type: string
+      id:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/internal.Item'
+        type: array
+      items_amount:
+        type: string
+      merchant_data:
+        additionalProperties:
+          type: string
+        type: object
+      shipping_address:
+        $ref: '#/definitions/internal.Address'
+      total_amount:
+        type: string
+      total_items:
+        type: string
+    type: object
+  internal.Request:
+    properties:
+      ipv4:
+        type: string
+      ipv6:
+        type: string
+    type: object
+  internal.Transaction:
+    properties:
+      client_reference_information:
+        $ref: '#/definitions/decision_manager.ClientReferenceInformation'
+      commerce_id:
+        type: integer
+      created_at:
+        type: string
+      cybersource_response:
+        $ref: '#/definitions/internal.CybersourceResponse'
+      device_information:
+        $ref: '#/definitions/internal.DeviceInformation'
+      merchant_defined_information:
+        items:
+          $ref: '#/definitions/decision_manager.MerchantDefinedInformation'
+        type: array
+      order_information:
+        $ref: '#/definitions/decision_manager.OrderInformation'
+      payment_information:
+        $ref: '#/definitions/decision_manager.PaymentInformationReq'
+      uuid:
+        type: string
+    type: object
+  internal.TransactionCreateRequest:
+    properties:
+      client:
+        $ref: '#/definitions/internal.Client'
+      commerce_id:
+        type: integer
+      payment_method:
+        $ref: '#/definitions/internal.PaymentMethod'
+      purchase:
+        $ref: '#/definitions/internal.Purchase'
+      request:
+        $ref: '#/definitions/internal.Request'
+    type: object
+  internal.TransactionResponse:
+    properties:
+      code:
+        type: integer
+      datetime:
+        type: string
+      status:
+        type: string
+      timestamp:
+        type: integer
+      transaction:
+        $ref: '#/definitions/internal.Transaction'
+    type: object
+  internal.TransactionsResponse:
+    properties:
+      code:
+        type: integer
+      datetime:
+        type: string
+      status:
+        type: string
+      timestamp:
+        type: integer
+      transactions:
+        items:
+          $ref: '#/definitions/internal.Transaction'
+        type: array
+    type: object
+  server.errorResponse:
+    properties:
+      code:
+        type: integer
+      datetime:
+        type: string
+      errors:
+        type: object
+      message:
+        type: string
+      status:
+        type: string
+      timestamp:
+        type: integer
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: traqlss9y8.execute-api.us-east-1.amazonaws.com
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Testing Swagger APIs.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Go RESTful API
+  version: "1.0"
+paths:
+  /commerces:
+    post:
+      consumes:
+      - application/json
+      description: Genera la configuración de un comercio proporcionando las credenciales
+        para establecer comunicación con el servicio de Cybersource. Esta configuración
+        es obligatoria para realizar transacciones con el comercio especificado.
+      parameters:
+      - description: Datos necesarios
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal.CommerceCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/internal.CommerceResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "412":
+          description: Precondition
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "500":
+          description: Error Internal Server
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+      security:
+      - JWT: []
+      summary: Create commerce.
+      tags:
+      - Commerce
+  /commerces/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Elimina la configuración del comercio en caso de un error en los
+        datos al crear el registro.
+      parameters:
+      - description: Identificador
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/internal.CommerceDeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "500":
+          description: Error Internal Server
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+      security:
+      - JWT: []
+      summary: Delete commerce.
+      tags:
+      - Commerce
+    get:
+      consumes:
+      - application/json
+      description: Obtiene la configuración de un comercio específico.
+      parameters:
+      - description: Identificador
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/internal.CommerceResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "500":
+          description: Error Internal Server
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+      security:
+      - JWT: []
+      summary: Get Commerce.
+      tags:
+      - Commerce
+    put:
+      consumes:
+      - application/json
+      description: Actualiza la configuración del comercio si las credenciales para
+        la comunicación con el servicio de Cybersource son modificadas, o en caso
+        de necesitar desactivar la configuración del comercio.
+      parameters:
+      - description: Identificador
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Datos necesarios
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal.CommerceUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/internal.CommerceResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "500":
+          description: Error Internal Server
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+      security:
+      - JWT: []
+      summary: Update commerce.
+      tags:
+      - Commerce
+  /commerces/{id}/transactions:
+    get:
+      consumes:
+      - application/json
+      description: Proporciona la información detalla de las transacciones realizadas
+        por un comercio específico.
+      parameters:
+      - description: Identificador de comercio
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/internal.TransactionsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "500":
+          description: Error Internal Server
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+      security:
+      - JWT: []
+      summary: Get transactions by commerce.
+      tags:
+      - Commerce
+  /transactions:
+    post:
+      consumes:
+      - application/json
+      description: Recibe la solicitud de una transacción, verifica la integridad
+        de los datos y personaliza la transacción para mandarla al servicio de Cybersource
+        para su procesamiento. La respuesta devuelta por Cybersource se registra en
+        la base de datos, asociada a la transacción correspondiente.
+      parameters:
+      - description: Datos necesarios
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal.TransactionCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/internal.TransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+        "500":
+          description: Error Internal Server
+          schema:
+            $ref: '#/definitions/server.errorResponse'
+      security:
+      - JWT: []
+      summary: Create transaction.
+      tags:
+      - Transaction
+schemes:
+- https
+securityDefinitions:
+  JWT:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

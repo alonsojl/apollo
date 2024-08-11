@@ -1,0 +1,1207 @@
+{
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Testing Swagger APIs.",
+        "title": "Go RESTful API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "traqlss9y8.execute-api.us-east-1.amazonaws.com",
+    "basePath": "/Dev/v1/cybersource",
+    "paths": {
+        "/commerces": {
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Genera la configuración de un comercio proporcionando las credenciales para establecer comunicación con el servicio de Cybersource. Esta configuración es obligatoria para realizar transacciones con el comercio especificado.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Create commerce.",
+                "parameters": [
+                    {
+                        "description": "Datos necesarios",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommerceCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommerceResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "412": {
+                        "description": "Precondition",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error Internal Server",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/commerces/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Obtiene la configuración de un comercio específico.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Get Commerce.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Identificador",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommerceResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error Internal Server",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Actualiza la configuración del comercio si las credenciales para la comunicación con el servicio de Cybersource son modificadas, o en caso de necesitar desactivar la configuración del comercio.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Update commerce.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Identificador",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Datos necesarios",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommerceUpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommerceResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error Internal Server",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Elimina la configuración del comercio en caso de un error en los datos al crear el registro.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Delete commerce.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Identificador",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommerceDeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error Internal Server",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/commerces/{id}/transactions": {
+            "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Proporciona la información detalla de las transacciones realizadas por un comercio específico.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Get transactions by commerce.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Identificador de comercio",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/internal.TransactionsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error Internal Server",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Recibe la solicitud de una transacción, verifica la integridad de los datos y personaliza la transacción para mandarla al servicio de Cybersource para su procesamiento. La respuesta devuelta por Cybersource se registra en la base de datos, asociada a la transacción correspondiente.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Create transaction.",
+                "parameters": [
+                    {
+                        "description": "Datos necesarios",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal.TransactionCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/internal.TransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error Internal Server",
+                        "schema": {
+                            "$ref": "#/definitions/server.errorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "decision_manager.AmountDetails": {
+            "type": "object",
+            "properties": {
+                "currency": {
+                    "type": "string"
+                },
+                "totalAmount": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.BillTo": {
+            "type": "object",
+            "properties": {
+                "address1": {
+                    "type": "string"
+                },
+                "address2": {
+                    "type": "string"
+                },
+                "administrativeArea": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "locality": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "postalCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.Card": {
+            "type": "object",
+            "properties": {
+                "bin": {
+                    "type": "string"
+                },
+                "expirationMonth": {
+                    "type": "string"
+                },
+                "expirationYear": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.ClientReferenceInformation": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "comments": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.ConsumerAuthenticationInformation": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.Detail": {
+            "type": "object",
+            "properties": {
+                "field": {
+                    "type": "string"
+                },
+                "reason": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.ErrorInformation": {
+            "type": "object",
+            "properties": {
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/decision_manager.Detail"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                },
+                "reason": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.IPAddress": {
+            "type": "object",
+            "properties": {
+                "administrativeArea": {
+                    "type": "string"
+                },
+                "anonymizerStatus": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "locality": {
+                    "type": "string"
+                },
+                "routingMethod": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.InfoCodes": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "customerList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "globalVelocity": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "identityChange": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "internet": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "phone": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "suspicious": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "velocity": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "decision_manager.LineItem": {
+            "type": "object",
+            "properties": {
+                "productSku": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "string"
+                },
+                "unitPrice": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.MerchantDefinedInformation": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.OrderInformation": {
+            "type": "object",
+            "properties": {
+                "amountDetails": {
+                    "$ref": "#/definitions/decision_manager.AmountDetails"
+                },
+                "billTo": {
+                    "$ref": "#/definitions/decision_manager.BillTo"
+                },
+                "lineItems": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/decision_manager.LineItem"
+                    }
+                },
+                "shipTo": {
+                    "$ref": "#/definitions/decision_manager.ShipTo"
+                }
+            }
+        },
+        "decision_manager.PaymentInformationReq": {
+            "type": "object",
+            "properties": {
+                "card": {
+                    "$ref": "#/definitions/decision_manager.Card"
+                }
+            }
+        },
+        "decision_manager.PaymentInformationResp": {
+            "type": "object",
+            "properties": {
+                "accountType": {
+                    "type": "string"
+                },
+                "bin": {
+                    "type": "string"
+                },
+                "binCountry": {
+                    "type": "string"
+                },
+                "issuer": {
+                    "type": "string"
+                },
+                "scheme": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.Profile": {
+            "type": "object",
+            "properties": {
+                "desinationQueue": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "selectorRule": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.RiskInformation": {
+            "type": "object",
+            "properties": {
+                "casePriority": {
+                    "type": "string"
+                },
+                "infoCodes": {
+                    "$ref": "#/definitions/decision_manager.InfoCodes"
+                },
+                "ipAddress": {
+                    "$ref": "#/definitions/decision_manager.IPAddress"
+                },
+                "localTime": {
+                    "type": "string"
+                },
+                "profile": {
+                    "$ref": "#/definitions/decision_manager.Profile"
+                },
+                "providers": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "rules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/decision_manager.Rules"
+                    }
+                },
+                "score": {
+                    "$ref": "#/definitions/decision_manager.Score"
+                }
+            }
+        },
+        "decision_manager.Rules": {
+            "type": "object",
+            "properties": {
+                "decision": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.Score": {
+            "type": "object",
+            "properties": {
+                "factorCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "modelUsed": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "string"
+                }
+            }
+        },
+        "decision_manager.ShipTo": {
+            "type": "object",
+            "properties": {
+                "address1": {
+                    "type": "string"
+                },
+                "address2": {
+                    "type": "string"
+                },
+                "administrativeArea": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "locality": {
+                    "type": "string"
+                },
+                "postalCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Address": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "external_number": {
+                    "type": "string"
+                },
+                "internal_number": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "town": {
+                    "type": "string"
+                },
+                "zip_code": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Client": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/internal.Address"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "maternal_surname": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "paternal_surname": {
+                    "type": "string"
+                },
+                "phone": {
+                    "$ref": "#/definitions/internal.Phone"
+                }
+            }
+        },
+        "internal.Commerce": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "merchant_id": {
+                    "type": "string"
+                },
+                "merchant_key_id": {
+                    "type": "string"
+                },
+                "merchant_secret_key": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.CommerceCreateRequest": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "merchant_id": {
+                    "type": "string"
+                },
+                "merchant_key_id": {
+                    "type": "string"
+                },
+                "merchant_secret_key": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.CommerceDeleteResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "commerce": {
+                    "type": "object"
+                },
+                "datetime": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
+                }
+            }
+        },
+        "internal.CommerceResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "commerce": {
+                    "$ref": "#/definitions/internal.Commerce"
+                },
+                "datetime": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
+                }
+            }
+        },
+        "internal.CommerceUpdateRequest": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "merchant_id": {
+                    "type": "string"
+                },
+                "merchant_key_id": {
+                    "type": "string"
+                },
+                "merchant_secret_key": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.CybersourceResponse": {
+            "type": "object",
+            "properties": {
+                "client_reference_information": {
+                    "$ref": "#/definitions/decision_manager.ClientReferenceInformation"
+                },
+                "consumer_authentication_information": {
+                    "$ref": "#/definitions/decision_manager.ConsumerAuthenticationInformation"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/decision_manager.Detail"
+                    }
+                },
+                "error_information": {
+                    "$ref": "#/definitions/decision_manager.ErrorInformation"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "payment_information": {
+                    "$ref": "#/definitions/decision_manager.PaymentInformationResp"
+                },
+                "reason": {
+                    "type": "string"
+                },
+                "risk_information": {
+                    "$ref": "#/definitions/decision_manager.RiskInformation"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "status_code": {
+                    "type": "integer"
+                },
+                "submit_time_utc": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.DeviceInformation": {
+            "type": "object",
+            "properties": {
+                "fingerprint": {
+                    "type": "string"
+                },
+                "ipv4": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Item": {
+            "type": "object",
+            "properties": {
+                "ean_upc": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "string"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "unit_amount": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.PaymentMethod": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/internal.Address"
+                },
+                "bin": {
+                    "type": "string"
+                },
+                "card_token": {
+                    "type": "string"
+                },
+                "expiration_month": {
+                    "type": "string"
+                },
+                "expiration_year": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Phone": {
+            "type": "object",
+            "properties": {
+                "area_code": {
+                    "type": "string"
+                },
+                "country_code": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Purchase": {
+            "type": "object",
+            "properties": {
+                "delivery_amount": {
+                    "type": "string"
+                },
+                "delivery_date": {
+                    "type": "string"
+                },
+                "delivery_service": {
+                    "type": "string"
+                },
+                "delivery_tracking": {
+                    "type": "string"
+                },
+                "device_fingerprint": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal.Item"
+                    }
+                },
+                "items_amount": {
+                    "type": "string"
+                },
+                "merchant_data": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "shipping_address": {
+                    "$ref": "#/definitions/internal.Address"
+                },
+                "total_amount": {
+                    "type": "string"
+                },
+                "total_items": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Request": {
+            "type": "object",
+            "properties": {
+                "ipv4": {
+                    "type": "string"
+                },
+                "ipv6": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Transaction": {
+            "type": "object",
+            "properties": {
+                "client_reference_information": {
+                    "$ref": "#/definitions/decision_manager.ClientReferenceInformation"
+                },
+                "commerce_id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "cybersource_response": {
+                    "$ref": "#/definitions/internal.CybersourceResponse"
+                },
+                "device_information": {
+                    "$ref": "#/definitions/internal.DeviceInformation"
+                },
+                "merchant_defined_information": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/decision_manager.MerchantDefinedInformation"
+                    }
+                },
+                "order_information": {
+                    "$ref": "#/definitions/decision_manager.OrderInformation"
+                },
+                "payment_information": {
+                    "$ref": "#/definitions/decision_manager.PaymentInformationReq"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.TransactionCreateRequest": {
+            "type": "object",
+            "properties": {
+                "client": {
+                    "$ref": "#/definitions/internal.Client"
+                },
+                "commerce_id": {
+                    "type": "integer"
+                },
+                "payment_method": {
+                    "$ref": "#/definitions/internal.PaymentMethod"
+                },
+                "purchase": {
+                    "$ref": "#/definitions/internal.Purchase"
+                },
+                "request": {
+                    "$ref": "#/definitions/internal.Request"
+                }
+            }
+        },
+        "internal.TransactionResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "datetime": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
+                },
+                "transaction": {
+                    "$ref": "#/definitions/internal.Transaction"
+                }
+            }
+        },
+        "internal.TransactionsResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "datetime": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
+                },
+                "transactions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal.Transaction"
+                    }
+                }
+            }
+        },
+        "server.errorResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "datetime": {
+                    "type": "string"
+                },
+                "errors": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "JWT": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "externalDocs": {
+        "description": "OpenAPI",
+        "url": "https://swagger.io/resources/open-api/"
+    }
+}

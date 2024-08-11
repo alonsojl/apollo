@@ -1,0 +1,5 @@
+*.log
+.idea/
+bin/bootstrap
+bin/apolo.zip
+linter.txt
