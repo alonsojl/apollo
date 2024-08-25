@@ -1,8 +1,8 @@
 package server
 
 import (
-	"apollo/internal"
 	"apollo/internal/models"
+	"apollo/internal/types"
 	"apollo/pkg/errorx"
 	"encoding/json"
 	"errors"
@@ -38,14 +38,14 @@ func ErrorHandler(err error) (events.APIGatewayProxyResponse, error) {
 		response.Message = werr.Message()
 
 		switch werr.Code() {
-		case internal.CodeInvalidArgument:
+		case types.CodeInvalidArgument:
 			response.Code = http.StatusBadRequest
 			if errors.As(werr, &verr) {
 				response.Errors = verr
 			}
-		case internal.CodeUnauthorized:
+		case types.CodeUnauthorized:
 			response.Code = http.StatusUnauthorized
-		case internal.CodeNotFound:
+		case types.CodeNotFound:
 			response.Code = http.StatusNotFound
 		}
 	}

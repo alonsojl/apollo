@@ -1,8 +1,9 @@
 package server
 
 import (
-	"apollo/internal"
+	"apollo/internal/domain"
 	"apollo/internal/models"
+	"apollo/internal/types"
 	"context"
 	"encoding/base64"
 	"encoding/json"
@@ -12,16 +13,12 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-type ProductService interface {
-	CreateProduct(ctx context.Context, params *internal.ProductParams) (*internal.Product, error)
-}
-
 type ProductHandler struct {
 	logger         *slog.Logger
-	productService ProductService
+	productService domain.ProductService
 }
 
-func NewProductHandler(logger *slog.Logger, productService ProductService) *ProductHandler {
+func NewProductHandler(logger *slog.Logger, productService domain.ProductService) *ProductHandler {
 	return &ProductHandler{
 		logger:         logger,
 		productService: productService,
@@ -46,21 +43,21 @@ func (h *ProductHandler) HandleCreateProduct(ctx context.Context, event events.A
 
 	if err := json.Unmarshal([]byte(event.Body), &request); err != nil {
 		h.logger.Error("invalid product request", "error", err)
-		return ErrorHandler(internal.ErrInvalidBody)
+		return ErrorHandler(types.ErrInvalidBody)
 	}
 
 	if err := request.Validate(); err != nil {
 		h.logger.Error("invalid product params", "error", err)
-		return ErrorHandler(internal.ErrInvalidParams)
+		return ErrorHandler(types.ErrInvalidParams)
 	}
 
 	image, err := base64.StdEncoding.DecodeString(request.Image)
 	if err != nil {
 		h.logger.Error("error decoding image", "error", err)
-		return ErrorHandler(internal.ErrInvalidBody)
+		return ErrorHandler(types.ErrInvalidBody)
 	}
 
-	product, err := h.productService.CreateProduct(ctx, &internal.ProductParams{
+	product, err := h.productService.CreateProduct(ctx, &types.ProductParams{
 		Name:         request.Name,
 		Price:        request.Price,
 		QRCode:       request.QRCode,

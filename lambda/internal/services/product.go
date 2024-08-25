@@ -1,26 +1,19 @@
 package services
 
 import (
-	"apollo/internal"
+	"apollo/internal/domain"
+	"apollo/internal/types"
 	"context"
 	"log/slog"
 )
 
-type ProductDBRepository interface {
-	CreateProduct(ctx context.Context, params *internal.ProductParams) (*internal.Product, error)
-}
-
-type ProductS3Repository interface {
-	UploadProductImage(ctx context.Context, imageBuffer []byte) (string, error)
-}
-
 type ProductService struct {
 	logger              *slog.Logger
-	productDBRepository ProductDBRepository
-	productS3Repository ProductS3Repository
+	productDBRepository domain.ProductDBRepository
+	productS3Repository domain.ProductS3Repository
 }
 
-func NewProductService(logger *slog.Logger, productRepository ProductDBRepository, productS3Repository ProductS3Repository) *ProductService {
+func NewProductService(logger *slog.Logger, productRepository domain.ProductDBRepository, productS3Repository domain.ProductS3Repository) *ProductService {
 	return &ProductService{
 		logger:              logger,
 		productDBRepository: productRepository,
@@ -28,7 +21,7 @@ func NewProductService(logger *slog.Logger, productRepository ProductDBRepositor
 	}
 }
 
-func (s *ProductService) CreateProduct(ctx context.Context, params *internal.ProductParams) (*internal.Product, error) {
+func (s *ProductService) CreateProduct(ctx context.Context, params *types.ProductParams) (*domain.Product, error) {
 	location, err := s.productS3Repository.UploadProductImage(ctx, params.Image)
 	if err != nil {
 		s.logger.Error("error uploading product image", "error", err)

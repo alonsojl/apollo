@@ -1,7 +1,7 @@
 package models
 
 import (
-	"apollo/internal"
+	"apollo/internal/types"
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
@@ -20,7 +20,7 @@ func (p ProductCreateRequest) Validate() error {
 		validation.Field(&p.Name,
 			validation.Required,
 			validation.Length(1, 100),
-			internal.Alphanumeric,
+			types.Alphanumeric,
 		),
 		validation.Field(&p.Price,
 			validation.Required,
@@ -29,7 +29,7 @@ func (p ProductCreateRequest) Validate() error {
 		validation.Field(&p.QRCode,
 			validation.Required,
 			validation.Length(1, 50),
-			internal.Alphanumeric,
+			types.Alphanumeric,
 		),
 		validation.Field(&p.Image,
 			validation.Required,

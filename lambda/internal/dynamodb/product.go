@@ -1,7 +1,8 @@
 package dynamodb
 
 import (
-	"apollo/internal"
+	"apollo/internal/domain"
+	"apollo/internal/types"
 	"context"
 	"log/slog"
 	"time"
@@ -37,7 +38,7 @@ func NewProductRepository(db *dynamodb.Client, logger *slog.Logger) *ProductRepo
 	}
 }
 
-func (r *ProductRepository) CreateProduct(ctx context.Context, params *internal.ProductParams) (*internal.Product, error) {
+func (r *ProductRepository) CreateProduct(ctx context.Context, params *types.ProductParams) (*domain.Product, error) {
 	var (
 		uuid      = uuid.New().String()
 		createdAt = time.Now().UTC().Format(time.DateTime)
@@ -66,7 +67,7 @@ func (r *ProductRepository) CreateProduct(ctx context.Context, params *internal.
 		return nil, err
 	}
 
-	return &internal.Product{
+	return &domain.Product{
 		UUID:         uuid,
 		Name:         params.Name,
 		Price:        params.Price,
