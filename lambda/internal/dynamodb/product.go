@@ -1,7 +1,7 @@
 package dynamodb
 
 import (
-	"apolo/internal"
+	"apollo/internal"
 	"context"
 	"log/slog"
 	"time"

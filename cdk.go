@@ -25,7 +25,7 @@ func NewCdkStack(scope constructs.Construct, id string, props *CdkStackProps) aw
 	stack := awscdk.NewStack(scope, &id, &sprops)
 
 	// Define S3 bucket.
-	bucketName := "apolo11"
+	bucketName := "apollo"
 	s3Bucket := awss3.NewBucket(stack, jsii.String("S3Bucket"), &awss3.BucketProps{
 		BucketName:        jsii.String(bucketName),
 		AutoDeleteObjects: jsii.Bool(true),
@@ -77,7 +77,7 @@ func NewCdkStack(scope constructs.Construct, id string, props *CdkStackProps) aw
 		FunctionName: jsii.String("products"),
 		Runtime:      awslambda.Runtime_PROVIDED_AL2023(),
 		Architecture: awslambda.Architecture_ARM_64(),
-		Code:         awslambda.AssetCode_FromAsset(jsii.String("../bin/apolo.zip"), nil),
+		Code:         awslambda.AssetCode_FromAsset(jsii.String("./lambda/bin/apollo.zip"), nil),
 		Handler:      jsii.String("main"),
 		MemorySize:   jsii.Number(128),
 		Timeout:      awscdk.Duration_Seconds(jsii.Number(60)),
@@ -93,7 +93,7 @@ func NewCdkStack(scope constructs.Construct, id string, props *CdkStackProps) aw
 
 	// Define API Gateway REST API.
 	restapi := awsapigateway.NewRestApi(stack, jsii.String("ApiGateway"), &awsapigateway.RestApiProps{
-		RestApiName: jsii.String("apolo"),
+		RestApiName: jsii.String("apollo"),
 		DefaultCorsPreflightOptions: &awsapigateway.CorsOptions{
 			AllowHeaders: jsii.Strings("Content-Type", "Authorization"),
 			AllowMethods: jsii.Strings("GET", "POST", "DELETE", "PUT", "OPTIONS"),
@@ -121,7 +121,7 @@ func main() {
 
 	app := awscdk.NewApp(nil)
 
-	NewCdkStack(app, "ApoloStack", &CdkStackProps{
+	NewCdkStack(app, "ApolloStack", &CdkStackProps{
 		awscdk.StackProps{
 			Env: env(),
 		},

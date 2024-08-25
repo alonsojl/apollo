@@ -31,7 +31,7 @@ linter: ## Lint source code.
 
 .PHONY: swagger
 swagger:  ## Generate doc swagger.
-	@swag init --ot yaml,json -o ./assets -g ./cmd/lambda/main.go
+	@swag init --ot yaml,json -o ./assets -g ./cmd/main.go
 
 .PHONY: test
 test: ## Run unit tests.
@@ -44,9 +44,9 @@ tools: ## Install tools.
 
 .PHONY: build
 build: ## Build lambda and zip.
-	@rm -rf ./bin/bootstrap ./bin/apolo.zip
-	@GOOS=linux GOARCH=arm64 go build -o ./bin/bootstrap ./cmd/lambda/product/main.go
-	@zip -j ./bin/apolo.zip ./bin/bootstrap
+	@rm -rf ./bin/bootstrap ./bin/apollo.zip
+	@GOOS=linux GOARCH=arm64 go build -o ./bin/bootstrap ./cmd/main.go
+	@zip -j ./bin/apollo.zip ./bin/bootstrap
 
 .PHONY: aws-cli 
 aws-cli: # Install the AWS CLI.

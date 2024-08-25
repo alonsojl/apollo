@@ -1,7 +1,7 @@
 package services
 
 import (
-	"apolo/internal"
+	"apollo/internal"
 	"context"
 	"log/slog"
 )

@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"apolo/pkg/errorx"
+	"apollo/pkg/errorx"
 )
 
 const (

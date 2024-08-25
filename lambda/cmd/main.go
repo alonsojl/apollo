@@ -1,11 +1,11 @@
 package main
 
 import (
-	"apolo/internal/dynamodb"
-	"apolo/internal/s3"
-	"apolo/internal/server"
-	"apolo/internal/services"
-	"apolo/pkg/env"
+	"apollo/internal/dynamodb"
+	"apollo/internal/s3"
+	"apollo/internal/server"
+	"apollo/internal/services"
+	"apollo/pkg/env"
 	"log"
 	"log/slog"
 	"os"

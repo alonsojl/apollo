@@ -1,9 +1,9 @@
 package server
 
 import (
-	"apolo/internal"
-	"apolo/internal/models"
-	"apolo/pkg/errorx"
+	"apollo/internal"
+	"apollo/internal/models"
+	"apollo/pkg/errorx"
 	"encoding/json"
 	"errors"
 	"net/http"

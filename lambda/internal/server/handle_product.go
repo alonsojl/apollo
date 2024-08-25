@@ -1,8 +1,8 @@
 package server
 
 import (
-	"apolo/internal"
-	"apolo/internal/models"
+	"apollo/internal"
+	"apollo/internal/models"
 	"context"
 	"encoding/base64"
 	"encoding/json"
